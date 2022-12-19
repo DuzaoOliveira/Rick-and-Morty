@@ -4,10 +4,14 @@ import axios from "axios";
 import * as S from "../styles/Home";
 import React, { useEffect, useState } from "react";
 import Characters from '../components/Characters'; 
+import Paginas from "../components/Paginas";
 
 function Home() {
 
 const [characters, setCharacters ] = useState([]);
+const [info, setInfo] = useState({})
+const [name, setName] = useState('')
+
 const primeiraUrl = 'https://rickandmortyapi.com/api/character'
 
 useEffect(() => {
@@ -30,9 +34,14 @@ console.log(characters, 'Rick');
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <p>Rick and Morty</p>
+      <S.Title>Rick and Morty</S.Title>
+
+      <S.Inp onChange={(e) => setName(e.target.value)} value={name} placeholder='Procure aqui um personagem' />
+      <button onClick={() => personagens(name)}>Buscar</button>
 <div>
+  <Paginas/>
   <Characters characters={characters} />
+  <Paginas/>
 </div>
 
 

@@ -10,12 +10,20 @@ const Characters = ({ characters = [] }) => {
         console.log(item.image, "item");
 
         return (
-            <S.Coluna key={index}>
-              <S.ContainerImg>
-                <img src={item.image} alt="" />
-              </S.ContainerImg>
+          
+            <S.Card key={index}>
+              <S.Imagens>
+                <img src={item.image} alt="" width={'100px'} height={'110px'}></img>
+                <S.Caracteristicas>
               <S.Nomes>{item.name}</S.Nomes>
-            </S.Coluna> 
+              <S.Lista>Gender:{item.gender}</S.Lista>
+              <S.Lista>Status:{item.status}</S.Lista>
+              <S.Lista>Species:{item.species}</S.Lista>
+              </S.Caracteristicas>
+              </S.Imagens>
+
+             
+            </S.Card> 
         );
       })}
     </S.Container>
