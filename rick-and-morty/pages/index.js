@@ -3,29 +3,37 @@ import Image from "next/image";
 import axios from "axios";
 import * as S from "../styles/Home";
 import React, { useEffect, useState } from "react";
-import Characters from '../components/Characters'; 
+import Characters from "../components/Characters";
 import Paginas from "../components/Paginas";
 
 function Home() {
+  const [characters, setCharacters] = useState([]);
+  const [info, setInfo] = useState({});
+  const [name, setName] = useState("");
 
-const [characters, setCharacters ] = useState([]);
-const [info, setInfo] = useState({})
-const [name, setName] = useState('')
+  const primeiraUrl = "https://rickandmortyapi.com/api/character";
 
-const primeiraUrl = 'https://rickandmortyapi.com/api/character'
+  const getCharacters = () => {
+    axios.get(primeiraUrl)
+      .then((res) => {
+        setCharacters(res.data.results);
+        setInfo(res?.data.info);
+        console.log(info, "infooooo");
+      })
+  }
+  useEffect(() => {
+    getCharacters(primeiraUrl)
+  }, []);
 
-useEffect(() => {
-  axios
-      .get(primeiraUrl)
-      .then((response) => {
-        setCharacters(response.data.results);
-      });
-}, []);
+  const onPrevious = () => {
+    getCharacters(info?.prev);
+  };
+  const onNext = () => {
+    getCharacters(info?.next);
+  };
 
-console.log(characters, 'Rick');
 
   return (
-   
     <S.container>
       <Head>
         <title>Rick and Morty</title>
@@ -36,15 +44,27 @@ console.log(characters, 'Rick');
 
       <S.Title>Rick and Morty</S.Title>
 
-      <S.Inp onChange={(e) => setName(e.target.value)} value={name} placeholder='Procure aqui um personagem' />
-      <button onClick={() => personagens(name)}>Buscar</button>
-<div>
-  <Paginas/>
-  <Characters characters={characters} />
-  <Paginas/>
-</div>
+      <S.Inp
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        placeholder="Procure aqui um personagem"
+      />
 
-
+      <div>
+        <Paginas
+          prev={info?.prev}
+          next={info?.next}
+          onPrevious={onPrevious}
+          onNext={onNext}
+        />
+        <Characters characters={characters} />
+        <Paginas
+          prev={info?.prev}
+          next={info?.next}
+          onPrevious={onPrevious}
+          onNext={onNext}
+        />
+      </div>
     </S.container>
   );
 }
