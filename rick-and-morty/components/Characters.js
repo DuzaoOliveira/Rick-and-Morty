@@ -1,14 +1,18 @@
 import React from "react";
 import * as S from "./Styled";
 
-const Characters = ({ characters = [] }) => {
+
+const Characters = ({ characters = [] ,name }) => {
   console.log(characters, "caract");
+
+  const rickFiltered = characters?.filter((item) =>
+  item?.name?.toLowerCase().includes(name.toLowerCase())
+  );
 
   return (
     <S.Container>
-      {characters?.map((item, index) => {
-        console.log(item.image, "item");
-
+      {rickFiltered?.map((item, index) => {
+      
         return (
           
             <S.Card key={index}>

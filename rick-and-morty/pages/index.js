@@ -11,7 +11,7 @@ function Home() {
   const [info, setInfo] = useState({});
   const [name, setName] = useState("");
 
-  const primeiraUrl = "https://rickandmortyapi.com/api/character";
+  const primeiraUrl = "https://rickandmortyapi.com/api/character?page=1";
 
   const getCharacters = () => {
     axios.get(primeiraUrl)
@@ -57,7 +57,7 @@ function Home() {
           onPrevious={onPrevious}
           onNext={onNext}
         />
-        <Characters characters={characters} />
+        <Characters characters={characters} name ={name} />
         <Paginas
           prev={info?.prev}
           next={info?.next}

@@ -13,17 +13,17 @@ const Paginas = ({ prev, next, onPrevious, onNext }) => {
   return (
     <nav>
       <ul>
-        {prev ? (
+        {/* {prev ? ( */}
           <li>
             <button onClick={() => handlePrevious()}>anterior</button>
           </li>
-        ) : null}
+        {/* // ) : null} */}
 
-        {next ? (
+        {/* {next ? ( */}
           <li>
             <button onClick={() => handleNext}>próximo</button>
           </li>
-        ) : null}
+        {/* // ) : null} */}
       </ul>
     </nav>
   );

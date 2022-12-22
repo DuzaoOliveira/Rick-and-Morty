@@ -32,3 +32,4 @@ text-overflow: ellipsis;
 export const Lista = styled.li`
 list-style: none;
 `
+
