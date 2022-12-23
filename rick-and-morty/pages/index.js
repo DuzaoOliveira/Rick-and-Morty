@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import axios from "axios";
 import * as S from "../styles/Home";
 import React, { useEffect, useState } from "react";
@@ -10,28 +9,19 @@ function Home() {
   const [characters, setCharacters] = useState([]);
   const [info, setInfo] = useState({});
   const [name, setName] = useState("");
+  const [page, setPage] = useState(1);
 
-  const primeiraUrl = "https://rickandmortyapi.com/api/character?page=1";
+  const primeiraUrl = `https://rickandmortyapi.com/api/character?page=${page}`;
 
   const getCharacters = () => {
-    axios.get(primeiraUrl)
-      .then((res) => {
-        setCharacters(res.data.results);
-        setInfo(res?.data.info);
-        console.log(info, "infooooo");
-      })
-  }
+    axios.get(primeiraUrl).then((res) => {
+      setCharacters(res.data.results);
+      setInfo(res?.data.info);
+    });
+  };
   useEffect(() => {
-    getCharacters(primeiraUrl)
-  }, []);
-
-  const onPrevious = () => {
-    getCharacters(info?.prev);
-  };
-  const onNext = () => {
-    getCharacters(info?.next);
-  };
-
+    getCharacters(primeiraUrl);
+  }, [page]);
 
   return (
     <S.container>
@@ -42,7 +32,7 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <S.Title>Rick and Morty</S.Title>
+      <S.Imagem src="rick.png" />
 
       <S.Inp
         onChange={(e) => setName(e.target.value)}
@@ -54,15 +44,16 @@ function Home() {
         <Paginas
           prev={info?.prev}
           next={info?.next}
-          onPrevious={onPrevious}
-          onNext={onNext}
+          setPage={setPage}
+          page={page}
         />
-        <Characters characters={characters} name ={name} />
+
+        <Characters characters={characters} name={name} />
         <Paginas
           prev={info?.prev}
           next={info?.next}
-          onPrevious={onPrevious}
-          onNext={onNext}
+          setPage={setPage}
+          page={page}
         />
       </div>
     </S.container>

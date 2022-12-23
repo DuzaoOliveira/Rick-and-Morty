@@ -32,4 +32,16 @@ text-overflow: ellipsis;
 export const Lista = styled.li`
 list-style: none;
 `
+export const But = styled.button`
+width: 80px;
+height: 30px;
+text-transform: uppercase;
+padding: 5px;
+border-radius: 10px;
+
+button {
+    display: flex;
+}
+`
+
 

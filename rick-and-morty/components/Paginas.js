@@ -1,29 +1,22 @@
 import React from "react";
+import * as S from "./Styled"
 
-const Paginas = ({ prev, next, onPrevious, onNext }) => {
-  
-  const handlePrevious = () => {
-    onPrevious();
-  };
-
-  const handleNext = () => {
-    onNext();
-  };
+const Paginas = ({ prev, next, setPage, page }) => {
 
   return (
     <nav>
       <ul>
-        {/* {prev ? ( */}
+        {prev && (
           <li>
-            <button onClick={() => handlePrevious()}>previus</button>
+            <S.But onClick={() => setPage(page - 1)}>previus</S.But>
           </li>
-        {/* // ) : null} */}
+        )}
 
-        {/* {next ? ( */}
+        {next && (
           <li>
-            <button onClick={() => handleNext}>next</button>
+            <S.But onClick={() => setPage(page + 1)}>next</S.But>
           </li>
-        {/* // ) : null} */}
+        )}
       </ul>
     </nav>
   );
